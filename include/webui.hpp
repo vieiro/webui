@@ -304,7 +304,7 @@ namespace webui {
         }
 
         // Set a custom handler to serve files. This custom handler should return full HTTP header and body.
-        void set_file_handler(const void* (*handler)(const char* filename, int* length)) const {
+        void set_file_handler(const void* (*handler)(size_t window, const char* filename, int* length)) const {
             webui_set_file_handler(webui_window, handler);
         }
 

@@ -44,7 +44,7 @@ bool virtual_file_system(const char* path, const unsigned char** file, int* leng
     return false;
 }
 
-const void* vfs(const char* path, int* length) {
+const void* vfs(size_t window, const char* path, int* length) {
     const unsigned char* file_data;
     int file_length;
 

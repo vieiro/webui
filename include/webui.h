@@ -426,12 +426,12 @@ WEBUI_EXPORT bool webui_set_default_root_folder(const char* path);
  * return full HTTP header and body.
  *
  * @param window The window number
- * @param handler The handler function: `void myHandler(const char* filename,
- * int* length)`
+ * @param handler The handler function: `void myHandler(size_t window,
+ * const char* filename, int* length)`
  *
  * @example webui_set_file_handler(myWindow, myHandlerFunction);
  */
-WEBUI_EXPORT void webui_set_file_handler(size_t window, const void* (*handler)(const char* filename, int* length));
+WEBUI_EXPORT void webui_set_file_handler(size_t window, const void* (*handler)(size_t window, const char* filename, int* length));
 
 /**
  * @brief Check if the specified window is still running.

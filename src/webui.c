@@ -328,7 +328,7 @@ typedef struct _webui_window_t {
     int y;
     bool position_set;
     size_t process_id;
-    const void*(*files_handler)(const char* filename, int* length);
+    const void*(*files_handler)(size_t window, const char* filename, int* length);
     webui_event_inf_t* events[WEBUI_MAX_IDS];
     size_t events_count;
     bool is_public;
@@ -722,7 +722,7 @@ void webui_run(size_t window, const char* script) {
     _webui_send_all(win, 0, WEBUI_CMD_JS_QUICK, script, js_len);
 }
 
-void webui_set_file_handler(size_t window, const void*(*handler)(const char* filename, int* length)) {
+void webui_set_file_handler(size_t window, const void*(*handler)(size_t window, const char* filename, int* length)) {
 
     if (handler == NULL)
         return;
@@ -4195,7 +4195,7 @@ static int _webui_external_file_handler(_webui_window_t* win, struct mg_connecti
         printf("[Core]\t\t_webui_external_file_handler() -> Calling custom files handler callback\n");
         printf("[Call]\n");
         #endif
-        const void* callback_resp = win->files_handler(url, (int*)&length);
+        const void* callback_resp = win->files_handler(win->num, url, (int*)&length);
 
         if (callback_resp != NULL) {
 
